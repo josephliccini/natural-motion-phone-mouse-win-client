@@ -15,6 +15,8 @@ namespace NaturalMotionPhoneMouseWindowsClient
         public Form1()
         {
             InitializeComponent();
+            var btClient = new NaturalMotionMouseBluetoothClient();
+            btClient.StartBluetoothServer();
         }
     }
 }
