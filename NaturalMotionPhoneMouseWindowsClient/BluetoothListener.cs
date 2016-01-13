@@ -8,6 +8,8 @@ using InTheHand.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
+using Newtonsoft.Json.Linq;
+using WindowsInput;
 
 namespace NaturalMotionPhoneMouseWindowsClient
 {
@@ -41,23 +43,28 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
         private void receiving()
         {
-            bool waiting = true;
-            do
+            var displacementTranslator = new TestDataDisplacementTranslator();
+
+            var sim = new InputSimulator();
+
+            Console.WriteLine("Waiting...");
+
+            var client = btListener.AcceptBluetoothClient();
+            var peerStream = client.GetStream();
+            var reader = new StreamReader(peerStream);
+
+            while (!reader.EndOfStream)
             {
-                Console.WriteLine("Waiting");
-                BluetoothClient client = btListener.AcceptBluetoothClient();
-                Stream peerStream = client.GetStream();
-                var reader = new StreamReader(peerStream);
-                Console.WriteLine("Got the data!");
-                while (!reader.EndOfStream)
-                {
-                    var moreData = reader.ReadLine();
-                    Console.WriteLine("MoreData: " + moreData);
-                }
-                reader.Close();
-                btListener.Stop();
-                waiting = false;
-            } while (waiting);
+                var message = reader.ReadLine();
+                Console.WriteLine("Data: " + message);
+
+                var displacementJson = JObject.Parse(message);
+                var mouseDelta = displacementTranslator.TranslateData(displacementJson);
+                sim.Mouse.MoveMouseBy((int) mouseDelta.DisplacementX, (int) mouseDelta.DisplacementY);
+            }
+
+            reader.Close();
+            btListener.Stop();
         }
 
     }
