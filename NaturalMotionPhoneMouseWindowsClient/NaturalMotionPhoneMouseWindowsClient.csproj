@@ -67,6 +67,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="InputSimulationTest.cs" />
+    <Compile Include="MouseButtonAction.cs" />
+    <Compile Include="MouseDelegate.cs" />
     <Compile Include="MouseMotionDelta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

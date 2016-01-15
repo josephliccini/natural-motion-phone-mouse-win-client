@@ -44,8 +44,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
         private void receiving()
         {
             var displacementTranslator = new TestDataDisplacementTranslator();
-
-            var sim = new InputSimulator();
+            var mouseDelegate = new MouseDelegate();
 
             Console.WriteLine("Waiting...");
 
@@ -58,9 +57,25 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 var message = reader.ReadLine();
                 Console.WriteLine("Data: " + message);
 
-                var displacementJson = JObject.Parse(message);
-                var mouseDelta = displacementTranslator.TranslateData(displacementJson);
-                sim.Mouse.MoveMouseBy((int) mouseDelta.DisplacementX, (int) mouseDelta.DisplacementY);
+                var jsonObject = JObject.Parse(message);
+
+                var messageType = jsonObject.Value<string>("messageType");
+
+                switch(messageType)
+                {
+                    case "MouseTranslation":
+                        var mouseDelta = displacementTranslator.TranslateData(jsonObject);
+                        mouseDelegate.TranslateMouseCursorBy(mouseDelta);
+                        break;
+                    case "MouseButtonAction":
+                        var mouseAction = new MouseButtonAction
+                        {
+                            MouseActionType = jsonObject.Value<string>("mouseActionType")
+                        };
+                        mouseDelegate.DoMouseButtonAction(mouseAction);
+                        break;
+                }
+
             }
 
             reader.Close();
