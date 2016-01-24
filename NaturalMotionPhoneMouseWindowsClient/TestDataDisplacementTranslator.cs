@@ -16,8 +16,8 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
             return new MouseMotionDelta
             {
-                DisplacementX = x,
-                DisplacementY = y
+                DisplacementX = Math.Floor(x) * 1.3,
+                DisplacementY = Math.Floor(y) * 1.3
             };
         }
     }

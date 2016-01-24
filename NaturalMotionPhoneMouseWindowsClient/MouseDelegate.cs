@@ -40,5 +40,18 @@ namespace NaturalMotionPhoneMouseWindowsClient
             }
 
         }
+
+        public void MoveMouseWheel(MouseWheelDelta mouseWheelDelta)
+        {
+            switch (mouseWheelDelta.MouseWheelActionType)
+            {
+                case "MouseWheelUp":
+                    Sim.Mouse.VerticalScroll((int) mouseWheelDelta.Amount);
+                    break;
+                case "MouseWheelDown":
+                    Sim.Mouse.VerticalScroll(-1 * ((int) mouseWheelDelta.Amount));
+                    break;
+            }
+        }
     }
 }

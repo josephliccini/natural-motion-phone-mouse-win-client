@@ -74,6 +74,14 @@ namespace NaturalMotionPhoneMouseWindowsClient
                         };
                         mouseDelegate.DoMouseButtonAction(mouseAction);
                         break;
+                    case "MouseWheelDelta":
+                        var mouseWheelDelta = new MouseWheelDelta
+                        {
+                            MouseWheelActionType = jsonObject.Value<string>("mouseWheelActionType"),
+                            Amount = jsonObject.Value<double>("amount")
+                        };
+                        mouseDelegate.MoveMouseWheel(mouseWheelDelta);
+                        break;
                 }
 
             }
