@@ -16,9 +16,15 @@ namespace NaturalMotionPhoneMouseWindowsClient
     class NaturalMotionMouseBluetoothClient
     {
         private BluetoothListener btListener;
+        private readonly Guid guid = new Guid("{11f4ad42-73f7-4bb4-a5c9-998cbf22b6fb}");
+        private Thread backgroundThread;
+        public bool Connected = false;
 
         public NaturalMotionMouseBluetoothClient()
         {
+            btListener = new BluetoothListener(guid);
+            btListener.ServiceName = "NaturalMotionMouse";
+            btListener.Authenticate = false;
         }
 
         public void StartBluetoothServer()
@@ -31,63 +37,74 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
             BluetoothRadio.PrimaryRadio.Mode = RadioMode.Discoverable;
 
-            var guid = new Guid("{11f4ad42-73f7-4bb4-a5c9-998cbf22b6fb}");
-
-            btListener = new BluetoothListener(guid);
-            btListener.ServiceName = "NaturalMotionMouse";
-            btListener.Authenticate = false;
             btListener.Start();
-            Thread thHR = new Thread(new ThreadStart(receiving));
-            thHR.Start();
+
+            backgroundThread = new Thread(new ThreadStart(receiving));
+            backgroundThread.Start();
         }
 
         private void receiving()
         {
-            var displacementTranslator = new TestDataDisplacementTranslator();
-            var mouseDelegate = new MouseDelegate();
-
-            Console.WriteLine("Waiting...");
-
-            var client = btListener.AcceptBluetoothClient();
-            var peerStream = client.GetStream();
-            var reader = new StreamReader(peerStream);
-
-            while (!reader.EndOfStream)
+            StreamReader reader = null;
+            try
             {
-                var message = reader.ReadLine();
-                Console.WriteLine("Data: " + message);
+                var displacementTranslator = new TestDataDisplacementTranslator();
+                var mouseDelegate = new MouseDelegate();
 
-                var jsonObject = JObject.Parse(message);
+                var client = btListener.AcceptBluetoothClient();
 
-                var messageType = jsonObject.Value<string>("messageType");
+                Connected = true;
 
-                switch(messageType)
+                var peerStream = client.GetStream();
+                reader = new StreamReader(peerStream);
+
+                while (!reader.EndOfStream)
                 {
-                    case "MouseTranslation":
-                        var mouseDelta = displacementTranslator.TranslateData(jsonObject);
-                        mouseDelegate.TranslateMouseCursorBy(mouseDelta);
-                        break;
-                    case "MouseButtonAction":
-                        var mouseAction = new MouseButtonAction
-                        {
-                            MouseActionType = jsonObject.Value<string>("mouseActionType")
-                        };
-                        mouseDelegate.DoMouseButtonAction(mouseAction);
-                        break;
-                    case "MouseWheelDelta":
-                        var mouseWheelDelta = new MouseWheelDelta
-                        {
-                            MouseWheelActionType = jsonObject.Value<string>("mouseWheelActionType"),
-                            Amount = jsonObject.Value<double>("amount")
-                        };
-                        mouseDelegate.MoveMouseWheel(mouseWheelDelta);
-                        break;
-                }
+                    var message = reader.ReadLine();
 
+                    var jsonObject = JObject.Parse(message);
+
+                    var messageType = jsonObject.Value<string>("messageType");
+
+                    switch(messageType)
+                    {
+                        case "MouseTranslation":
+                            var mouseDelta = displacementTranslator.TranslateData(jsonObject);
+                            mouseDelegate.TranslateMouseCursorBy(mouseDelta);
+                            break;
+                        case "MouseButtonAction":
+                            var mouseAction = new MouseButtonAction
+                            {
+                                MouseActionType = jsonObject.Value<string>("mouseActionType")
+                            };
+                            mouseDelegate.DoMouseButtonAction(mouseAction);
+                            break;
+                        case "MouseWheelDelta":
+                            var mouseWheelDelta = new MouseWheelDelta
+                            {
+                                MouseWheelActionType = jsonObject.Value<string>("mouseWheelActionType"),
+                                Amount = jsonObject.Value<double>("amount")
+                            };
+                            mouseDelegate.MoveMouseWheel(mouseWheelDelta);
+                            break;
+                    }
+                }
+                reader.Close();
+                btListener.Stop();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                if (reader != null) reader.Close();
+                btListener.Stop();
             }
 
-            reader.Close();
-            btListener.Stop();
+        }
+
+        public void KillServer()
+        {
+            this.btListener.Stop();
+            this.backgroundThread.Abort();
         }
 
     }
