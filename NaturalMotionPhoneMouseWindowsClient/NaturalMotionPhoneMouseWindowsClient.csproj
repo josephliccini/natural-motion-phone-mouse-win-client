@@ -70,6 +70,7 @@
     <Compile Include="MouseButtonAction.cs" />
     <Compile Include="MouseDelegate.cs" />
     <Compile Include="MouseMotionDelta.cs" />
+    <Compile Include="MouseSensitivityDelta.cs" />
     <Compile Include="MouseWheelDelta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

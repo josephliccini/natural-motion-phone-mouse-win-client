@@ -69,6 +69,9 @@
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.KillButton);
             this.Controls.Add(this.ConnectButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximumSize = new System.Drawing.Size(599, 176);
+            this.MinimumSize = new System.Drawing.Size(599, 176);
             this.Name = "Form1";
             this.Text = "Natural Motion Phone Mouse Client";
             this.ResumeLayout(false);

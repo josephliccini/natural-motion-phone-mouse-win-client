@@ -10,6 +10,12 @@ namespace NaturalMotionPhoneMouseWindowsClient
     class TestDataDisplacementTranslator : DisplacementTranslator
     {
         private double shortMessageCount = 0.0;
+        public double MultiplicativeConstant { get; set; }
+
+        public TestDataDisplacementTranslator()
+        {
+            this.MultiplicativeConstant = 1.5;
+        }
 
         public override MouseMotionDelta TranslateData(JObject json)
         {
@@ -27,7 +33,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 ++shortMessageCount;
             }
 
-            double multiplicativeFactor = Math.Max(1.5 - (shortMessageCount / 2.0), 0);
+            double multiplicativeFactor = Math.Max(MultiplicativeConstant - (shortMessageCount / 2.0), 0);
 
             return new MouseMotionDelta
             {

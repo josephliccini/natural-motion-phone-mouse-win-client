@@ -62,12 +62,21 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 {
                     var message = reader.ReadLine();
 
+                    Console.WriteLine(message);
+
                     var jsonObject = JObject.Parse(message);
 
                     var messageType = jsonObject.Value<string>("messageType");
 
                     switch(messageType)
                     {
+                        case "MouseSensitivity":
+                            var mouseSensitivity = new MouseSensitivityMessage
+                            {
+                                Amount = jsonObject.Value<double>("amount")  
+                            };
+                            displacementTranslator.MultiplicativeConstant = mouseSensitivity.Amount;
+                            break;
                         case "MouseTranslation":
                             var mouseDelta = displacementTranslator.TranslateData(jsonObject);
                             mouseDelegate.TranslateMouseCursorBy(mouseDelta);
@@ -97,6 +106,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 Console.WriteLine(ex);
                 if (reader != null) reader.Close();
                 btListener.Stop();
+                Connected = false;
             }
 
         }
