@@ -18,13 +18,20 @@ namespace NaturalMotionPhoneMouseWindowsClient
         private BluetoothListener btListener;
         private readonly Guid guid = new Guid("{11f4ad42-73f7-4bb4-a5c9-998cbf22b6fb}");
         private Thread backgroundThread;
-        public bool Connected = false;
+        private bool Connected = false;
+
+        private List<ConnectionObserver> observers = new List<ConnectionObserver>();
 
         public NaturalMotionMouseBluetoothClient()
         {
             btListener = new BluetoothListener(guid);
             btListener.ServiceName = "NaturalMotionMouse";
             btListener.Authenticate = false;
+        }
+
+        public void RegisterConnectionObserver(ConnectionObserver o)
+        {
+            observers.Add(o);
         }
 
         public void StartBluetoothServer()
@@ -54,6 +61,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 var client = btListener.AcceptBluetoothClient();
 
                 Connected = true;
+                NotifyObservers();
 
                 var peerStream = client.GetStream();
                 reader = new StreamReader(peerStream);
@@ -98,8 +106,10 @@ namespace NaturalMotionPhoneMouseWindowsClient
                             break;
                     }
                 }
+                Connected = false;
                 reader.Close();
                 btListener.Stop();
+                NotifyObservers();
             }
             catch (Exception ex)
             {
@@ -107,6 +117,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 if (reader != null) reader.Close();
                 btListener.Stop();
                 Connected = false;
+                NotifyObservers();
             }
 
         }
@@ -117,5 +128,9 @@ namespace NaturalMotionPhoneMouseWindowsClient
             this.backgroundThread.Abort();
         }
 
+        private void NotifyObservers()
+        {
+            this.observers.ForEach((o) => o.HandleConnectionChange(Connected));
+        }
     }
 }

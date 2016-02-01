@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BluetoothListener.cs" />
+    <Compile Include="ConnectionObserver.cs" />
     <Compile Include="DisplacementTranslator.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
