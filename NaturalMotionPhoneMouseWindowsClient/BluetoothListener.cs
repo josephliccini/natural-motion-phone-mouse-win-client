@@ -124,13 +124,13 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
         public void KillServer()
         {
-            this.btListener.Stop();
-            this.backgroundThread.Abort();
+            btListener.Stop();
+            backgroundThread.Abort();
         }
 
         private void NotifyObservers()
         {
-            this.observers.ForEach((o) => o.HandleConnectionChange(Connected));
+            observers.ForEach(o => o.HandleConnectionChange(Connected));
         }
     }
 }
