@@ -64,6 +64,9 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 NotifyObservers();
 
                 var peerStream = client.GetStream();
+
+                SendAckMessage(peerStream);
+
                 reader = new StreamReader(peerStream);
 
                 while (!reader.EndOfStream)
@@ -131,6 +134,19 @@ namespace NaturalMotionPhoneMouseWindowsClient
         private void NotifyObservers()
         {
             observers.ForEach(o => o.HandleConnectionChange(Connected));
+        }
+
+        private void SendAckMessage(Stream stream)
+        {
+            var writer = new StreamWriter(stream);
+
+            JObject ackObj = JObject.FromObject(new
+            {
+                message = "ConnectionAck"
+            });
+
+            writer.Write(ackObj.ToString().Replace("\r\n", "") + "\n");
+            writer.Flush();
         }
     }
 }
