@@ -18,6 +18,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
         public Form1()
         {
             InitializeComponent();
+            InputSimulationTest.SimulateMouseMotions();
             BTClient = new NaturalMotionMouseBluetoothClient();
             BTClient.RegisterConnectionObserver(this);
         }

@@ -37,6 +37,9 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 case "Right_Release":
                     Sim.Mouse.RightButtonUp();
                     break;
+                case "Middle_Press":
+                    Sim.Mouse.MiddleButtonClick();
+                    break;
             }
 
         }
