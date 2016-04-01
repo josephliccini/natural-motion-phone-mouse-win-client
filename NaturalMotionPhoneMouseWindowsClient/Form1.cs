@@ -21,6 +21,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
             InputSimulationTest.SimulateMouseMotions();
             BTClient = new NaturalMotionMouseBluetoothClient();
             BTClient.RegisterConnectionObserver(this);
+            ConnectButton_Click(null, null);
         }
 
         public void HandleConnectionChange(bool connectionChange)
@@ -53,6 +54,25 @@ namespace NaturalMotionPhoneMouseWindowsClient
         private void KillButton_Click(object sender, EventArgs e)
         {
             BTClient.KillServer();
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                notifyIcon1.Visible = true;
+                this.Hide();
+            }
+            else if (FormWindowState.Normal == this.WindowState)
+            {
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
         }
     }
 }
