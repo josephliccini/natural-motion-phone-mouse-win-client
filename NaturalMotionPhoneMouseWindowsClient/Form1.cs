@@ -14,11 +14,20 @@ namespace NaturalMotionPhoneMouseWindowsClient
     public partial class Form1 : Form, ConnectionObserver
     {
         private NaturalMotionMouseBluetoothClient BTClient;
+        private MenuItem menuItem1;
+        private ContextMenu contextMenu1;
 
         public Form1()
         {
             InitializeComponent();
-            InputSimulationTest.SimulateMouseMotions();
+
+            this.menuItem1 = new MenuItem();
+            this.menuItem1.Text = "Exit";
+            this.menuItem1.Click += new EventHandler(this.menuItem1_Click);
+
+            this.contextMenu1 = new ContextMenu(new MenuItem[] { menuItem1 });
+            this.notifyIcon1.ContextMenu = this.contextMenu1;
+
             BTClient = new NaturalMotionMouseBluetoothClient();
             BTClient.RegisterConnectionObserver(this);
             ConnectButton_Click(null, null);
@@ -73,6 +82,11 @@ namespace NaturalMotionPhoneMouseWindowsClient
         {
             Show();
             WindowState = FormWindowState.Normal;
+        }
+
+        private void menuItem1_Click(object Sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
