@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7F58478A3B9D460393B170CF4E51DCF7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AA906BE16FBD4019ADDD2B11E0422FF3"
         "OwnerKey" = "8:_2C08BA2474464E1498D80A228526BDCE"
         "MsmSig" = "8:_UNDEFINED"
@@ -217,6 +223,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F58478A3B9D460393B170CF4E51DCF7"
+            {
+            "SourcePath" = "8:..\\gator.png"
+            "TargetName" = "8:gator.png"
+            "Tag" = "8:"
+            "Folder" = "8:_17161A3AA2944D169F9B7281D5D2A594"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AA906BE16FBD4019ADDD2B11E0422FF3"
             {
             "AssemblyRegister" = "3:1"
@@ -367,7 +393,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:NaturalMotionPhoneMouse"
         "ProductCode" = "8:{E47B8F94-D895-4931-9DE3-0E6759C953BB}"
-        "PackageCode" = "8:{0F7131BA-FE54-4EB4-8DD0-9E041079008A}"
+        "PackageCode" = "8:{4AFD4288-2F6D-4F06-ACD1-A31D79DFDC12}"
         "UpgradeCode" = "8:{CD50FA44-A725-4F6C-8497-13B3FCB943EE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -617,7 +643,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7F58478A3B9D460393B170CF4E51DCF7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -667,7 +694,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7F58478A3B9D460393B170CF4E51DCF7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -711,7 +739,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7F58478A3B9D460393B170CF4E51DCF7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -759,7 +788,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7F58478A3B9D460393B170CF4E51DCF7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -781,7 +811,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_7F58478A3B9D460393B170CF4E51DCF7"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
