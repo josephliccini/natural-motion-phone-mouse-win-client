@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_03DAFA58586D4BFDB442AF8267413B22"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2C08BA2474464E1498D80A228526BDCE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -29,6 +23,12 @@
         {
         "MsmKey" = "8:_3BF34AA43C45025E1C6AA5666EBC6483"
         "OwnerKey" = "8:_2C08BA2474464E1498D80A228526BDCE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4AEFA83EC25448F0A46935AD58B1389C"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,6 +142,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -172,26 +180,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03DAFA58586D4BFDB442AF8267413B22"
-            {
-            "SourcePath" = "8:..\\Gakuseisean-Aire-Mouse.ico"
-            "TargetName" = "8:Gakuseisean-Aire-Mouse.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_17161A3AA2944D169F9B7281D5D2A594"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3BF34AA43C45025E1C6AA5666EBC6483"
             {
             "AssemblyRegister" = "3:1"
@@ -221,6 +209,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AEFA83EC25448F0A46935AD58B1389C"
+            {
+            "SourcePath" = "8:..\\mouse-3-512.ico"
+            "TargetName" = "8:mouse-3-512.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_17161A3AA2944D169F9B7281D5D2A594"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F58478A3B9D460393B170CF4E51DCF7"
@@ -410,7 +418,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Client for Android App: Natural Motion Phone Mouse"
         "ARPURLINFOABOUT" = "8:https://www.github.com/josephliccini"
-        "ARPPRODUCTICON" = "8:_03DAFA58586D4BFDB442AF8267413B22"
+        "ARPPRODUCTICON" = "8:_4AEFA83EC25448F0A46935AD58B1389C"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -524,7 +532,7 @@
             "Target" = "8:_2C08BA2474464E1498D80A228526BDCE"
             "Folder" = "8:_87E7CD94AB0D40A6ADA8E9517A6DCEF8"
             "WorkingFolder" = "8:_17161A3AA2944D169F9B7281D5D2A594"
-            "Icon" = "8:_03DAFA58586D4BFDB442AF8267413B22"
+            "Icon" = "8:_4AEFA83EC25448F0A46935AD58B1389C"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DAB3F4812C8A450288B25F57166C7949"
@@ -538,7 +546,7 @@
             "Target" = "8:_2C08BA2474464E1498D80A228526BDCE"
             "Folder" = "8:_4AD6F32A9CBE4137BCEADC6737300685"
             "WorkingFolder" = "8:_17161A3AA2944D169F9B7281D5D2A594"
-            "Icon" = "8:_03DAFA58586D4BFDB442AF8267413B22"
+            "Icon" = "8:_4AEFA83EC25448F0A46935AD58B1389C"
             "Feature" = "8:"
             }
         }
