@@ -41,16 +41,13 @@ namespace NaturalMotionPhoneMouseWindowsClient
                     Sim.Mouse.MiddleButtonClick();
                     break;
                 case "XButton1_Press":
-                    Sim.Mouse.XButtonDown(1);
-                    break;
                 case "XButton2_Press":
-                    Sim.Mouse.XButtonDown(2);
                     break;
                 case "XButton1_Release":
-                    Sim.Mouse.XButtonUp(1);
+                    Sim.Mouse.XButtonClick(1);
                     break;
                 case "XButton2_Release":
-                    Sim.Mouse.XButtonUp(2);
+                    Sim.Mouse.XButtonClick(2);
                     break;
             }
 
