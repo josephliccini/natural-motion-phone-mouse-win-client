@@ -18,7 +18,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
         private BluetoothListener btListener;
         private readonly Guid guid = new Guid("{11f4ad42-73f7-4bb4-a5c9-998cbf22b6fb}");
         private Thread backgroundThread;
-        private bool Connected = false;
+        private bool connected = false;
 
         private List<ConnectionObserver> observers = new List<ConnectionObserver>();
 
@@ -60,7 +60,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
                 var client = btListener.AcceptBluetoothClient();
 
-                Connected = true;
+                connected = true;
                 NotifyObservers();
 
                 var peerStream = client.GetStream();
@@ -109,7 +109,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                             break;
                     }
                 }
-                Connected = false;
+                connected = false;
                 reader.Close();
                 btListener.Stop();
                 NotifyObservers();
@@ -119,7 +119,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 Console.WriteLine(ex);
                 if (reader != null) reader.Close();
                 btListener.Stop();
-                Connected = false;
+                connected = false;
                 NotifyObservers();
             }
 
@@ -133,7 +133,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
         private void NotifyObservers()
         {
-            observers.ForEach(o => o.HandleConnectionChange(Connected));
+            observers.ForEach(o => o.HandleConnectionChange(connected));
         }
 
         private void SendAckMessage(Stream stream)

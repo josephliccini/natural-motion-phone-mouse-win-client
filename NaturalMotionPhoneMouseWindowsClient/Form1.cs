@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace NaturalMotionPhoneMouseWindowsClient
 {
     public partial class Form1 : Form, ConnectionObserver
     {
         private NaturalMotionMouseBluetoothClient BTClient;
-        private MenuItem menuItem1;
+        private MenuItem menuItem1, menuItem2;
         private ContextMenu contextMenu1;
 
         public Form1()
@@ -23,9 +24,13 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
             this.menuItem1 = new MenuItem();
             this.menuItem1.Text = "Exit";
-            this.menuItem1.Click += new EventHandler(this.menuItem1_Click);
+            this.menuItem1.Click += new EventHandler(menuItem1_Click);
 
-            this.contextMenu1 = new ContextMenu(new MenuItem[] { menuItem1 });
+            this.menuItem2 = new MenuItem();
+            this.menuItem2.Text = "Open";
+            this.menuItem2.Click += new EventHandler(menuItem2_Click);
+
+            this.contextMenu1 = new ContextMenu(new MenuItem[] { menuItem2, menuItem1 });
             this.notifyIcon1.ContextMenu = this.contextMenu1;
 
             BTClient = new NaturalMotionMouseBluetoothClient();
@@ -70,7 +75,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
             if (FormWindowState.Minimized == this.WindowState)
             {
                 notifyIcon1.Visible = true;
-                this.Hide();
+                Hide();
             }
             else if (FormWindowState.Normal == this.WindowState)
             {
@@ -80,13 +85,38 @@ namespace NaturalMotionPhoneMouseWindowsClient
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Show();
-            WindowState = FormWindowState.Normal;
+            returnToNormalState();
         }
 
         private void menuItem1_Click(object Sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+    
+        private void menuItem2_Click(object Sender, EventArgs e)
+        {
+            returnToNormalState();
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu",
+                         BindingFlags.Instance | BindingFlags.NonPublic);
+                mi.Invoke(notifyIcon1, null);
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BTClient.KillServer();
+        }
+
+        private void returnToNormalState()
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
         }
     }
 }
