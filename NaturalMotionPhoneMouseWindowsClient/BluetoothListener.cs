@@ -61,6 +61,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                 var client = btListener.AcceptBluetoothClient();
 
                 connected = true;
+
                 NotifyObservers();
 
                 var peerStream = client.GetStream();
@@ -86,7 +87,7 @@ namespace NaturalMotionPhoneMouseWindowsClient
                             {
                                 Amount = jsonObject.Value<double>("amount")  
                             };
-                            displacementTranslator.MultiplicativeConstant = mouseSensitivity.Amount;
+                            displacementTranslator.SensitivityConstant = mouseSensitivity.Amount;
                             break;
                         case "MouseTranslation":
                             var mouseDelta = displacementTranslator.TranslateData(jsonObject);
